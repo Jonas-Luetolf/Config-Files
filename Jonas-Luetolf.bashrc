@@ -11,6 +11,9 @@ export VISUAL="nvim"
 #source other files
 source ~/.aliasrc
 
+shopt -s direxpand
+shopt -s dirspell
+shopt -s cdspell  
 
 # show todo list
 if  command -v todo-list &> /dev/null
