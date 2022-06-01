@@ -1,3 +1,5 @@
 alias la="ls -la"
 alias ll="ls -ll"
 alias c="clear"
+alias rb="source ~/.bashrc"
+alias sys-upgrade="sudo apt update && sudo apt upgrade -y"
