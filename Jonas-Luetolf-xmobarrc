@@ -1,7 +1,7 @@
 Config { 
 
    -- appearance
-     font =         "xft:Bitstream Vera Sans Mono:size=14:bold:antialias=true"
+     font =         "xft:Bitstream Vera Sans Mono:size=16:bold:antialias=true"
    , bgColor =      "black"
    , alpha = 0
    , fgColor =      "#909090"
@@ -12,7 +12,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }{ %RJTT% | %date% || %kbd% "
+   , template = "%battery% | %multicpu% | %memory% | %dynnetwork% }{ %date% || %kbd% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -38,7 +38,7 @@ Config {
                              ] 10
 
         -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
+        , Run MultiCpu       [ "--template" , "Cpu: <total>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "darkgreen"

@@ -2,10 +2,14 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+
 import XMonad.Hooks.ManageDocks
+
+import XMonad.Layout.Spacing
 
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -42,9 +46,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -160,7 +161,6 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 
      delta   = 3/100
 
-------------------------------------------------------------------------
 -- Window rules
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
@@ -168,15 +168,12 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
-------------------------------------------------------------------------
 -- Event handling
 myEventHook = mempty
 
-------------------------------------------------------------------------
 -- Status bars and logging
 myLogHook = return ()
 
-------------------------------------------------------------------------
 -- Startup hook
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
@@ -207,7 +204,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = spacingWithEdge 10 $ myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
@@ -219,9 +216,8 @@ help :: String
 help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "",
     "-- launching and killing programs",
-    "mod-Shift-Enter  Launch xterminal",
+    "mod-Shift-Enter  Launch terminal",
     "mod-p            Launch dmenu",
-    "mod-Shift-p      Launch gmrun",
     "mod-Shift-c      Close/kill the focused window",
     "mod-Space        Rotate through the available layout algorithms",
     "mod-Shift-Space  Reset the layouts on the current workSpace to default",
