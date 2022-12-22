@@ -1,20 +1,17 @@
-BG1=75
-FG1=0
-BG2=252
-FG2=0
+shopt -s checkwinsize
+
+PS1="\[\e[1;30;42m\] \u\[\e[1;32;46m\]\[\e[1;30;46m\] \W\[\e[0m\e[1;36m\]\[\e[0m\]"
 
 
-PS1="$(tput setab $BG1)$(tput setaf $FG1)\u $(tput setaf $BG1)$(tput setab $BG2)$(tput setaf $FG2) \W$(tput srg0)$(tput setaf $BG2)$(tput sgr0) "
 #exports
-export PS1
-export PATH="$HOME.local/bin:$PATH"
-export EDITOR="nvim"
-export VISUAL="nvim"
+export PATH="$HOME/bin:$PATH"
+if [ -f /bin/nvim ]; then
+	export EDITOR="nvim"
+	export VISUAL="nvim"
+fi
 
 #source other files
 source ~/.aliasrc
-
-
 
 if [ -f /etc/bash_completion ]; then
   source /etc/bash_completion
@@ -25,7 +22,6 @@ shopt -s dirspell
 shopt -s cdspell  
 
 set colored-stats on
-
 
 # show todo list
 if  command -v todo-list &> /dev/null
