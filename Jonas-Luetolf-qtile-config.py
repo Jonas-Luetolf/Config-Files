@@ -56,8 +56,6 @@ keys = [
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "l", lazy.layout.right()),
-
-
     Key(
         [mod, "shift"],
         "space",
@@ -71,7 +69,6 @@ keys = [
     # Close, logout and reset Qtile
     Key([mod], "q", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    
     # Launch Applications
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key(
