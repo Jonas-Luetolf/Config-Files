@@ -11,7 +11,6 @@ from libqtile.widget import Spacer, Backlight
 from libqtile.widget.image import Image
 from libqtile.dgroups import simple_key_binder
 
-
 mod = "mod1"
 
 # Applications
@@ -53,7 +52,12 @@ foregroundColorTwo = "#3b4252"
 keys = [
     # Switch between windows
     Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
-    # TODO: implement window movement and growing
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "l", lazy.layout.right()),
+
+
     Key(
         [mod, "shift"],
         "space",
@@ -67,7 +71,7 @@ keys = [
     # Close, logout and reset Qtile
     Key([mod], "q", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Applications
+    
     # Launch Applications
     Key([mod, "shift"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key(
