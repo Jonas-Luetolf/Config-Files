@@ -90,6 +90,8 @@ keys = [
     # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn("lux -a 10%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("lux -s 10%")),
+    Key([mod], "t", lazy.group["terminal"].dropdown_toggle("terminal")),
+    Key([mod], "s", lazy.group["htop"].dropdown_toggle("htop")),
 ]
 
 groups = [
@@ -103,6 +105,8 @@ groups = [
     Group("8", layout="MonadTall"),
     Group("9", layout="MonadTall"),
     Group("10", layout="MonadTall"),
+    ScratchPad("terminal", [DropDown("terminal", terminal)]),
+    ScratchPad("htop", [DropDown("htop", terminal + " -e htop")]),
 ]
 
 dgroups_key_binder = simple_key_binder(mod)
