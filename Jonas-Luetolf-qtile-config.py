@@ -76,8 +76,8 @@ keys = [
     ),
     # Launch Menus
     Key([mod, "shift"], "d", lazy.spawn(display_menu), desc="Launch display menu"),
-    Key([mod, "shift"], "o", lazy.spawn(audio_input_menu), desc="Launch display menu"),
-    Key([mod, "shift"], "i", lazy.spawn(audio_output_menu), desc="Launch display menu"),
+    Key([mod, "shift"], "i", lazy.spawn(audio_input_menu), desc="Launch audio input menu"),
+    Key([mod, "shift"], "o", lazy.spawn(audio_output_menu), desc="Launch audio output menu"),
     Key([mod, "shift"], "p", lazy.spawn(power_menu), desc="Launch display menu"),
     # Launch Launchers
     Key([mod], "p", lazy.spawn(app_launcher), desc="Launch app launcher"),
