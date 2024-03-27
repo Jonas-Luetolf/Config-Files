@@ -1,8 +1,9 @@
 import os
 import subprocess
 from libqtile import hook
-from libqtile import bar, layout, widget
-from libqtile.layout import MonadThreeCol, MonadTall, MonadWide
+from libqtile import bar, widget, qtile
+from libqtile.layout.xmonad import MonadWide, MonadTall, MonadThreeCol
+from libqtile.layout.floating import Floating
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.dgroups import simple_key_binder
@@ -263,10 +264,10 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 
-floating_layout = layout.Floating(
+floating_layout = Floating(
     border_focus=colorScheme[4],
     float_rules=[
-        *layout.Floating.default_float_rules,
+        *Floating.default_float_rules,
         Match(wm_class="ssh-askpass"),
         Match(wm_class="kcalc"),
         Match(title="branchdialog"),  # gitk
