@@ -16,6 +16,18 @@ mod = "mod1"
 wallpaper = QtileRandomWallpaper("/home/jonas/Bilder/wallpapers/")
 colorScheme = NORD
 
+if qtile.core.name == "x11":
+    term = "urxvt"
+
+elif qtile.core.name == "wayland":
+
+    from libqtile.backend.wayland.inputs import InputConfig
+
+    wl_input_rules = {
+        "1267:12377:ELAN1300:00 04F3:3059 Touchpad": InputConfig(),
+        "*": InputConfig(pointer_accel=True),
+        "type:keyboard": InputConfig(kb_layout="ch"),
+    }
 
 # Applications
 terminal = "alacritty"
