@@ -8,12 +8,13 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, 
 from libqtile.lazy import lazy
 from libqtile.dgroups import simple_key_binder
 
-from wallpapers import QtileRandomWallpaper
+from wallpapers import QtileRandomWallpaper, QtileWallpaper
 from colors import NORD
 
 mod = "mod1"
 
-wallpaper = QtileRandomWallpaper("/home/jonas/Bilder/wallpapers/")
+# wallpaper = QtileRandomWallpaper("/home/jonas/Bilder/wallpapers/")
+wallpaper = QtileWallpaper("/home/jonas/Bilder/wallpapers/0320.jpg")
 colorScheme = NORD
 
 if qtile.core.name == "x11":
@@ -43,15 +44,18 @@ display_menu = f"{script_path}/displayctl menu"
 audio_input_menu = f"{script_path}/inctl"
 audio_output_menu = f"{script_path}/sinkctl"
 power_menu = f"{script_path}/powermenu"
-
+window_menu = "rofi -show window"
 
 # Tools
 calc = f"{script_path}/roficalc"
+calc2 = "qalculate-gtk"
+ssh_menu = f"{script_path}/ssh-menu"
+search = f"{script_path}/search"
 
 # KEYBINDINGS
 keys = [
     # Switch focus between windows
-    Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "Tab", lazy.spawn(window_menu), desc="open window menu"),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
@@ -93,6 +97,9 @@ keys = [
     Key([mod, "shift"], "d", lazy.spawn(display_menu), desc="Launch display menu"),
     # Rofi scripts
     Key([mod], "F1", lazy.spawn(calc), desc="Launch calculator"),
+    Key([mod], "F2", lazy.spawn(calc2), desc="Launch calculator"),
+    Key([mod], "F3", lazy.spawn(ssh_menu), desc="Launch ssh menu"),
+    Key([mod], "F4", lazy.spawn(search), desc="Launch search menu"),
     # Launch Launchers
     Key([mod], "p", lazy.spawn(app_launcher), desc="Launch app launcher"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -172,6 +179,7 @@ screens = [
             [
                 widget.GroupBox(
                     padding=4,
+                    fontsize=20,
                     active=colorScheme.foregroundColor,
                     inactive=colorScheme.foregroundColorTwo,
                     highlight_color=[
@@ -183,6 +191,7 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(
                     foreground=colorScheme[5],
+                    fontsize=20,
                 ),
                 widget.Chord(
                     chords_colors={
@@ -213,20 +222,23 @@ screens = [
                     foreground=colorScheme[7],
                     background=colorScheme.foregroundColorTwo,
                     padding=8,
+                    fontsize=20,
                 ),
                 widget.Volume(
                     foreground=colorScheme[4],
                     background=colorScheme.foregroundColorTwo,
                     fmt=": {}",
                     padding=8,
+                    fontsize=20,
                 ),
                 widget.Battery(
                     charge_char="",
                     discharge_char="",
-                    format="  {percent:2.0%} {char}",
+                    format="    {percent:2.0%} {char}",
                     foreground=colorScheme[6],
                     background=colorScheme.foregroundColorTwo,
                     padding=8,
+                    fontsize=20,
                 ),
                 widget.TextBox(
                     text="\u25e2",
@@ -241,16 +253,19 @@ screens = [
                     foreground=colorScheme[10],
                     background=colorScheme.backgroundColor,
                     padding=8,
+                    fontsize=20,
                 ),
                 widget.Clock(
                     format=" %H:%M %S",
                     foreground=colorScheme[5],
                     background=colorScheme.backgroundColor,
                     padding=8,
+                    fontsize=20,
                 ),
                 widget.QuickExit(fmt=" ", foreground=colorScheme[9], padding=8),
             ],
-            20,
+            30,
+            margin=[10, 20, 0, 20],
         ),
     ),
 ]
@@ -281,7 +296,8 @@ floating_layout = Floating(
     float_rules=[
         *Floating.default_float_rules,
         Match(wm_class="ssh-askpass"),
-        Match(wm_class="kcalc"),
+        Match(wm_class="qalculate-gtk"),
+        Match(wm_class="Main"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
