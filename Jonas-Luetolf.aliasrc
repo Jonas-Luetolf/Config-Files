@@ -6,4 +6,12 @@ alias rb="source ~/.bashrc"
 alias sys-upgrade="sudo apt update && sudo apt upgrade -y"
 
 # Python
-alias actvenv="source ./venv/bin/activate"
+actvenv() {
+    if [ -d .venv ]; then
+        source .venv/bin/activate
+    elif [ -d venv ]; then
+        source venv/bin/activate
+    else
+        echo "No virtual environment found (.venv or venv)"
+    fi
+}
