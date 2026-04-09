@@ -1,9 +1,20 @@
-alias la="ls -la"
-alias ll="ls -ll"
-alias c="clear"
-alias rb="source ~/.bashrc"
+alias ls="ls --color=auto"
+alias la="ls -la --color=auto"
+alias ll="ls -ll --color=auto"
 
-alias sys-upgrade="sudo apt update && sudo apt upgrade -y"
+# WSL only aliases
+is_wsl() {
+    grep -qi microsoft /proc/version && return 0
+    [ -n "$WSL_DISTRO_NAME" ] && return 0
+    return 1
+}
+
+if is_wsl; then
+    alias winhome="cd /mnt/c/Users/jonas/"
+    alias winnext="cd /mnt/c/Users/jonas/Nextcloud/"
+fi
+
+alias c="clear"
 
 # Python
 actvenv() {
